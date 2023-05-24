@@ -7,6 +7,7 @@ const TOKEN = process.env.DISCORD_TOKEN;
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 
 
 
@@ -42,7 +43,7 @@ const openai= new OpenAIApi(configuration);
 client.on('messageCreate', async (message) => {
 
     try {
-        if(message.author.bot) return;
+        if(message.author.bot || message.channel.id !== CHANNEL_ID) return;
         if(message.content === "!uwu")
         {
             message.reply("GPT 3.5-turbo bot developed by Usman#1000. uwu");
