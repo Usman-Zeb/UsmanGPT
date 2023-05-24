@@ -1,47 +1,17 @@
 require('dotenv').config();
 const axios = require('axios');
 
-// const PREFIX = '!';
-// const {Client, GatewayIntentBits } = require('discord.js');
-// const client = new Client({ intents: [
-//     GatewayIntentBits.Guilds,
-//     GatewayIntentBits.GuildMessages,
-//     GatewayIntentBits.MessageContent
-// ]})
-
-// const {Configuration, OpenAIApi} = require('openai');
-// const configuration = new Configuration({
-//     organization: process.env.OPENAI_ORG,
-//     apiKey: process.env.OPENAI_KEY,
-// });
-
-// const openai= new OpenAIApi(configuration);
 
 
-// client.on('messageCreate', async function(message) {
-//     try {
-//         if(message.author.bot) return;
-//         const gptResponse = await openai.createCompletion({
-//             model: "gpt-3.5-turbo",
-//             prompt:`Usman's GPT is a friendly chatbot.\n\
-//             Usman's GPT: Hello, how are you?\n\
-//             ${message.author.username}: ${message.content}\n\
-//             Usman's GPT:`,
-//             temperature:0.9,
-//             stop: ["ChatGPT:", "GPT:", "Usman:"],
-//         })
-//         message.reply(`You said: ${gptResponse.data.choices[0].text}`);
-//     }catch(err){
-//         console.log(err)
-//     }
-// })
+const TOKEN = process.env.DISCORD_TOKEN;
+const OPENAI_KEY = process.env.OPENAI_KEY;
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 
-// client.login(process.env.DISCORD_TOKEN);
-// console.log("Usman's GPT Bot is online on Discord");
 
-
-const {Client, IntentsBitField } = require('discord.js');
+const {Client, IntentsBitField, Routes } = require('discord.js')
+const {REST} = require('@discordjs/rest');
 const {Configuration, OpenAIApi} = require('openai');
 
 
@@ -54,13 +24,15 @@ const client = new Client({
     ]
 });
 
+const rest = new REST({ version: '10' }).setToken(TOKEN);
+
 
 client.on('ready', ()=> {
     console.log("Usman's GPT Bot is online on Discord");
 });
 
 const configuration = new Configuration({
-    apiKey: process.env.OPENAI_KEY,
+    apiKey: OPENAI_KEY,
 });
 
 const openai= new OpenAIApi(configuration);
@@ -124,4 +96,36 @@ client.on('messageCreate', async (message) => {
 
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.on('interactionCreate', (interaction) => {
+    if(interaction.isChatInputCommand())
+    {
+        interaction.reply({content: 'GPT 3.5-turbo bot developed by Usman#1000. uwu'})
+    }
+});
+
+async function main () {
+
+    const commands = [
+        {
+          name: 'uwu',
+          description: 'About bot',
+          
+        },
+      ];
+
+    try {
+        console.log('Started refreshing application (/) commands.');
+      
+        await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: commands });
+      
+        console.log('Successfully reloaded application (/) commands.');
+      } catch (error) {
+        console.error(error);
+      }
+};
+
+
+main();
+
+
+client.login(TOKEN);
