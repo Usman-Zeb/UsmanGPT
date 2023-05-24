@@ -29,6 +29,8 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 client.on('ready', ()=> {
     console.log("Usman's GPT Bot is online on Discord");
+
+    client.user.setActivity({name:'with the real homies. uwu'})
 });
 
 const configuration = new Configuration({
