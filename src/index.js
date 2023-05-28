@@ -104,13 +104,20 @@ client.on('messageCreate', async (message) => {
 
 });
 
-client.on('interactionCreate', (interaction) => {
+client.on('interactionCreate', async (interaction) => {
     if(interaction.isChatInputCommand())
     {
         //const obj = interaction.options.data;
         if(interaction.commandName === 'image')
         {
             console.log(interaction.options.getString('prompt'));
+            const response = await openai.createImage({
+                prompt: interaction.options.getString('prompt'),
+                n: 1,
+                size: "1024x1024",
+              });
+              image_url = response.data.data[0].url;
+              interaction.reply({content: image_url});
         }
         else
         {
