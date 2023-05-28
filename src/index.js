@@ -108,7 +108,7 @@ client.on('interactionCreate', (interaction) => {
     if(interaction.isChatInputCommand())
     {
         //const obj = interaction.options.data;
-        if(interaction.options.get('name').value === 'image')
+        if(interaction.commandName === 'image')
         {
             console.log(interaction.options.getString('prompt'));
         }
@@ -116,9 +116,6 @@ client.on('interactionCreate', (interaction) => {
         {
         interaction.reply({content: 'GPT 3.5-turbo bot developed by Usman#1000. uwu'})
         }
-
-        console.log(interaction.options.get('name').value);
-        console.log(interaction.options.getString('prompt'));
     }
     
 });
