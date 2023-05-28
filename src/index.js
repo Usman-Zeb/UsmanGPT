@@ -107,7 +107,15 @@ client.on('messageCreate', async (message) => {
 client.on('interactionCreate', (interaction) => {
     if(interaction.isChatInputCommand())
     {
+        const obj = interaction.options.data;
+        if(obj[Object.keys(obj)[0]] === 'image')
+        {
+            console.log(interaction.options.getString('image'));
+        }
+        else
+        {
         interaction.reply({content: 'GPT 3.5-turbo bot developed by Usman#1000. uwu'})
+        }
     }
 });
 
