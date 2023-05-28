@@ -32,6 +32,7 @@ client.on('ready', ()=> {
     console.log("Usman's GPT Bot is online on Discord");
 
     client.user.setActivity({name:'with the real homies. uwu'})
+    
 });
 
 const configuration = new Configuration({
@@ -50,6 +51,8 @@ client.on('messageCreate', async (message) => {
             return;
         }
         if(message.content.startsWith('!')) return;
+
+        if(!message.mentions.has(client.user)) return;
     
         let conversationLog = [{role: 'system', content: 'You are a rude chatbot.'}];
     
@@ -58,12 +61,13 @@ client.on('messageCreate', async (message) => {
         let previousMessages = await message.channel.messages.fetch({limit: 15});
     
         previousMessages.reverse();
-    
         previousMessages.forEach((msg) => {
     
             if(message.content.startsWith('!')) return;
             if(msg.author.id !== client.user.id && message.author.bot) return;
             if(msg.author.id !== message.author.id) return;
+
+
     
             conversationLog.push({
                 role: 'user',
