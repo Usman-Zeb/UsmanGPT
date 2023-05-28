@@ -25,6 +25,7 @@ const client = new Client({
     ]
 });
 
+
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 
@@ -117,6 +118,17 @@ async function main () {
           name: 'uwu',
           description: 'About bot',
           
+        },
+        {
+            name: 'image',
+            description: 'Generate an image via DALL-E',
+            options: [{
+                name: 'prompt',
+                description: 'Enter the prompt you want the image generated for',
+                type: 3,
+                required: true,
+
+            },],
         },
       ];
 
