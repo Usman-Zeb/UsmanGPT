@@ -119,7 +119,7 @@ client.on('interactionCreate', async (interaction) => {
               });
               image_url = response.data.data[0].url;
               console.log(image_url);
-              interaction.editReply(`**Prompt: ${interaction.options.getString('prompt')}**`,{files: [{attachment: image_url, name: "image.jpg"}]});
+              interaction.editReply({content: `**Prompt: ${interaction.options.getString('prompt')}**`,files: [{attachment: image_url, name: "image.jpg",}]});
               //interaction.reply("", {});
         }
         else
