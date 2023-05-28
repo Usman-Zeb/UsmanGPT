@@ -115,11 +115,11 @@ client.on('interactionCreate', async (interaction) => {
             const response = await openai.createImage({
                 prompt: interaction.options.getString('prompt'),
                 n: 1,
-                size: "1024x1024",
+                size: "256x256",
               });
               image_url = response.data.data[0].url;
               console.log(image_url);
-              interaction.editReply({files: [{attachment: image_url, name: "image.jpg"}]});
+              interaction.editReply(`**Prompt: ${interaction.options.getString('prompt')}**`,{files: [{attachment: image_url, name: "image.jpg"}]});
               //interaction.reply("", {});
         }
         else
