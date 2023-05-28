@@ -117,7 +117,8 @@ client.on('interactionCreate', async (interaction) => {
                 size: "1024x1024",
               });
               image_url = response.data.data[0].url;
-              interaction.reply({content: image_url});
+              console.log(image_url);
+              //interaction.reply("", {});
         }
         else
         {
