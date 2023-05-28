@@ -116,7 +116,11 @@ client.on('interactionCreate', (interaction) => {
         {
         interaction.reply({content: 'GPT 3.5-turbo bot developed by Usman#1000. uwu'})
         }
+
+        console.log(obj[Object.keys(obj)[0]]);
+        console.log(interaction.options.getString('image'));
     }
+    
 });
 
 async function main () {
