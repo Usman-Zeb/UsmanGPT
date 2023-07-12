@@ -63,4 +63,4 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, feel free to contact the developer at usman@example.com.
+If you have any questions, suggestions, or feedback, feel free to contact the developer at usmanzeb13@gmail.com.
